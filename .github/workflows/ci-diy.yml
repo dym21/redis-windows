@@ -56,7 +56,7 @@ jobs:
           make BUILD_TLS=yes CFLAGS="-Wno-char-subscripts -O0"
           find . -mindepth 1 -maxdepth 2 -type f -regex '.*\(\.exe\|\.conf\)' -exec cp -f "{}" "$workspace/${{ env.REDIS_DIST }}-msys2" \;
           cd $workspace
-          cp README.md README.zh_CN.md start.bat /usr/bin/msys-2.0.dll /usr/bin/msys-crypto-3.dll /usr/bin/msys-ssl-3.dll ${{ env.REDIS_DIST }}-msys2
+          cp README.md README.zh_CN.md start.bat /usr/bin/msys-2.0.dll /usr/bin/msys-gcc_s-seh-1.dll /usr/bin/msys-stdc++-6.dll /usr/bin/msys-crypto-3.dll /usr/bin/msys-ssl-3.dll ${{ env.REDIS_DIST }}-msys2
           sed -i 's/pidfile \/var\/run/pidfile ./' ${{ env.REDIS_DIST }}-msys2/redis.conf
           zip -q -r ${{ env.REDIS_DIST }}-msys2.zip ${{ env.REDIS_DIST }}-msys2
           cp install_redis_service.bat uninstall_redis_service.bat publish/* ${{ env.REDIS_DIST }}-msys2/
