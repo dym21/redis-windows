@@ -71,7 +71,7 @@ jobs:
           echo $REDIS_MSYS2_VERSION_INFO
           # If ( -not ( $REDIS_MSYS2_VERSION_INFO -match "${{ env.RELEASE_VERSION }}" ) ) { 
           #   Write-Output "msys2 verification failed"
-          #   exit 1
+          #   exit 0
           # }
 
       - uses: cygwin/cygwin-install-action@master
