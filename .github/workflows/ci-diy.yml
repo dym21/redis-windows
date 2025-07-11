@@ -48,10 +48,12 @@ jobs:
           mkdir ${{ env.REDIS_DIST }}-msys2
           sed -i 's/__GNU_VISIBLE/1/' /usr/include/dlfcn.h
           tar -xzf redis-${{ env.RELEASE_VERSION }}.tar.gz
+          
           cd redis-${{ env.RELEASE_VERSION }}/src && ./mkreleasehdr.sh
+          sed -i 's/server\.configfile = getAbsolutePath(argv\[1\]);/server.configfile = zstrdup(argv[1]);/' redis-${{ env.RELEASE_VERSION }}/src/server.c
           sed -i 's/\"\;/\"/' asciilogo.h
           echo '" Redis for Windows Project Home \n"' >> asciilogo.h
-          echo '" https://github.com/redis-windows/redis-windows  \n\n";' >> asciilogo.h
+          echo '" sd.zhongfu/redis for windows  \n\n";' >> asciilogo.h
           cd ..
           make BUILD_TLS=yes CFLAGS="-Wno-char-subscripts -O0"
           find . -mindepth 1 -maxdepth 2 -type f -regex '.*\(\.exe\|\.conf\)' -exec cp -f "{}" "$workspace/${{ env.REDIS_DIST }}-msys2" \;
